@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Save notes</title>
+  <style>
+    body {
+      /* width: 300px; */
+      display: flex;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      padding: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+    input:focus{
+      border: 2px solid rgb(0, 157, 255);
+      /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
+    }
+    .container{
+      width: 80%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <input type="text" id="title-input" placeholder="Enter PDF title...">
+    <button id="convert-button">Convert to PDF</button>
+  </div>
+  <script src="libs/jspdf.umd.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
