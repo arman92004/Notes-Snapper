@@ -1,5 +1,5 @@
 (function() {
-  // Create and style capture button
+
   const captureButton = document.createElement('button');
   captureButton.id = 'capture-button';
   captureButton.innerText = 'Snap';
@@ -14,13 +14,11 @@
     border: 'none',
     cursor: 'pointer',
     fontSize: '16px',
-    borderRadius: '10px', // Rounded corners
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Drop shadow
+    borderRadius: '10px', 
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
   });
-
   document.body.appendChild(captureButton);
 
-  // Create and style container for captures
   const capturesContainer = document.createElement('div');
   capturesContainer.id = 'captures-container';
   Object.assign(capturesContainer.style, {
@@ -34,16 +32,14 @@
     border: '1px solid #ccc',
     padding: '10px',
     zIndex: '9999',
-    borderRadius: '10px', // Rounded corners
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Drop shadow
+    borderRadius: '10px', 
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', 
     scrollbarWidth: 'none',
     msOverflowStyle: 'none',
     display: 'none'
   });
-  
   document.body.appendChild(capturesContainer);
 
-  // Create and style button to delete all frames
   const deleteAllButton = document.createElement('button');
   deleteAllButton.id = 'delete-all-button';
   deleteAllButton.innerText = 'New Notebook';
@@ -56,12 +52,11 @@
     border: 'none',
     cursor: 'pointer',
     fontSize: '16px',
-    borderRadius: '10px', // Rounded corners
+    borderRadius: '10px',
   });
-  
+
   capturesContainer.appendChild(deleteAllButton);
 
-  // Create and style button to open popup
   const openPopupButton = document.createElement('button');
   openPopupButton.id = 'open-popup-button';
   openPopupButton.innerText = 'Save notes';
@@ -73,7 +68,7 @@
     border: 'none',
     cursor: 'pointer',
     fontSize: '16px',
-    borderRadius: '10px', // Rounded corners
+    borderRadius: '10px',
   });
   capturesContainer.appendChild(openPopupButton);
   openPopupButton.addEventListener('click', () => {
@@ -81,12 +76,10 @@
   });
 
 
-  // Create frames container to hold the frames
   const framesContainer = document.createElement('div');
   framesContainer.id = 'frames-container';
   capturesContainer.appendChild(framesContainer);
 
-  // Create and style button to collapse/expand captures container
   const toggleButton = document.createElement('button');
   toggleButton.id = 'toggle-button';
   toggleButton.innerText = 'Notes';
@@ -125,7 +118,6 @@
         frames.push({ data: frameData, text: '', timestamp: timestamp });
         chrome.storage.local.set({ frames: frames }, () => {
           console.log('Frame captured and saved to local storage!');
-          // addFrameToUI({ data: frameData, text: '', timestamp: timestamp }, frames.length - 1, frames.length);
           updateFramesUI(frames)
         });
       });
@@ -134,7 +126,6 @@
     }
   });
 
-  // Event listener for deleting all frames
   deleteAllButton.addEventListener('click', () => {
     chrome.storage.local.set({ frames: [] }, () => {
       console.log('All frames deleted.');
@@ -212,7 +203,7 @@
   function formatTimestamp(seconds) {
     const date = new Date(0);
     date.setSeconds(seconds);
-    return date.toISOString().substr(11, 8); // HH:MM:SS format
+    return date.toISOString().substring(11, 8);
   }
 
   function updateFrameText(index, text) {
@@ -248,12 +239,11 @@
   }
 
   function updateFramesUI(frames) {
-    framesContainer.innerHTML = ''; // Clear only the frames container
+    framesContainer.innerHTML = '';
     frames.forEach((frame, index) => {
       addFrameToUI(frame, index, frames.length);
     });
   }
 
-  // Load frames on script load
   loadFrames();
 })();
